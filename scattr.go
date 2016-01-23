@@ -5,6 +5,7 @@ import(
   "log"
   "net/http"
   "os"
+  "bytes"
 
 )
 
@@ -17,12 +18,12 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
   fmt.Println("REQUEST method: ", method)
   payload := r.Form.Encode()
   fmt.Println("REQUEST payload: ", payload)
-  buffer.WriteString("{\"Responses\":[ ")
-  for _, url := range node.OutUrls {
+  buffer.WriteString("\"Responses\":[ ")
+  for _, url := range node.outUrls {
 		fmt.Fprintf(os.Stdout, "Calling fanout with %s, %s, %s\n", url+r.URL.Path, method, payload)
-		go fanOutRequest(url+r.URL.Path, method, payload)
+		go scattr(url+r.URL.Path, method, payload)
 }
-
+}
 
 func StartScattrInterface(host string, port int) {
   addr := fmt.Sprintf("%s:%d", host, port)
