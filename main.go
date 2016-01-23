@@ -6,7 +6,7 @@ import (
 )
 
 type scattrData struct {
-   outUrls []string //list of fanout Urls
+   OutUrls []string //list of fanout Urls
 }
 
 

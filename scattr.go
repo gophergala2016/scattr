@@ -18,7 +18,7 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
   method := r.Method
   payload := r.Form.Encode()
   buffer.WriteString("\"Responses\":[ ")
-  for _, url := range node.outUrls {
+  for _, url := range node.OutUrls {
 		fmt.Fprintf(os.Stdout, "Calling fanout with %s, %s, %s\n", url+r.URL.Path, method, payload)
 		go scattr(url+r.URL.Path, method, payload, ch)
     respString = <- ch

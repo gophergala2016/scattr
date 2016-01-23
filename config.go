@@ -1,30 +1,26 @@
 package main
 
 import (
-  "os"
+  // "os"
   "fmt"
-  "bufio"
+  // "bufio"
+  "github.com/BurntSushi/toml"
 )
 
-func GetScattrData() scattrData {
-  d := scattrData{}
-   d.Read()
-  return d
+func NewConfigFromFile(fname string) (*scattrData, error){
+	config := new(scattrData)
+	if _, err := toml.DecodeFile(fname, &config); err != nil {
+	fmt.Println(err)
+	return nil, err
+ }
+return config, nil
 }
 
-func (data *scattrData) Read() {
-  f,err := os.Open(*ConfigFile)
-  if err != nil {
-    fmt.Fprintf(os.Stderr, "Unable to read config file: %s", err.Error())
-  }
-  defer f.Close()
-  scanner := bufio.NewScanner(f)
-  for scanner.Scan() {
-    url := scanner.Text()
-    data.outUrls = append(data.outUrls, url)
-    if err := scanner.Err(); err != nil {
-			break
-		}
-  }
-
+func GetScattrData() *scattrData {
+  conf, err := NewConfigFromFile(*ConfigFile)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		return nil
+	}
+	return conf
 }
