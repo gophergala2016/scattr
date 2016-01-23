@@ -6,7 +6,6 @@ import(
   "net/http"
   "os"
   "bytes"
-
 )
 
 func scattrHandler(w http.ResponseWriter, r *http.Request) {
@@ -21,8 +20,10 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
   buffer.WriteString("\"Responses\":[ ")
   for _, url := range node.outUrls {
 		fmt.Fprintf(os.Stdout, "Calling fanout with %s, %s, %s\n", url+r.URL.Path, method, payload)
-		go scattr(url+r.URL.Path, method, payload)
+		go scattr(url+r.URL.Path, method, payload, ch)
     respString = <- ch
+    log.Printf("Response: ", respString)
+
 }
 }
 

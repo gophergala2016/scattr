@@ -2,15 +2,19 @@ package main
 
 import (
 "net/http"
+"encoding/json"
 "strings"
+"fmt"
+"io/ioutil"
+"os"
 )
 
-func createResponse(url string, resp *http.Response, err error) {
+func createResponse(url string, resp *http.Response, err error) string{
   var respString string
   if err != nil {
     respString = createErrorResponse(url, err)
   } else {
-    var contentType, responseType string
+    var contentType string
     contentType = getContentType(resp)
     respString = getResponseType(contentType, url, resp)
   }
@@ -24,10 +28,12 @@ func createErrorResponse(url string, err error) string{
 	} else {
 		msg = fmt.Sprintf("%v", err)
 	}
-	return msg
+  errMsg := &ErrorMsg{url, msg}
+	m, _ := json.Marshal(errMsg)
+	updatedMsg := string(m)
+	return updatedMsg
 }
 
-}
 
 func getContentType(resp *http.Response) string {
   var contentType string
@@ -42,18 +48,36 @@ func getContentType(resp *http.Response) string {
 }
 
 
-func getResponseType(contentType string, url string, resp *http.Response) {
+func getResponseType(contentType string, url string, resp *http.Response) string {
   var respStr string
 	switch contentType {
 	case "html":
-		respStr = createHTMLResponse(url, resp)
+		// respStr = createHTMLResponse(url, resp)
 	case "json":
 		respStr = createJSONResponse(url, resp)
 	case "binary":
-		respStr = createBinaryResponse(url, resp)
+		// respStr = createBinaryResponse(url, resp)
 	}
-	//fmt.Printf("response from %s is %s \n", url, respStr)
-	//fmt.Println(respStr)
 	return respStr
+}
 
+func createJSONResponse(url string, resp *http.Response) string {
+	msg := readResponse(url, resp)
+	jsonMsg := &JSONMsg{url, json.RawMessage(msg)}
+	m, _ := json.Marshal(jsonMsg)
+	updatedMsg := string(m)
+
+	// updatedMsg := createJsonResp(url, msg)
+	fmt.Println("updated..", updatedMsg)
+	return updatedMsg
+}
+
+func readResponse(url string, resp *http.Response) string {
+	contents, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("%s", err)
+		os.Exit(1)
+	}
+	msg := string(contents)
+	return msg
 }
