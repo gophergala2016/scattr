@@ -9,6 +9,7 @@ import(
 )
 
 func scattrHandler(w http.ResponseWriter, r *http.Request) {
+  var buffer bytes.Buffer
   fmt.Fprintf(os.Stdout, "REQUEST:[%s]\n", r)
   r.ParseForm()
   node := GetScattrData() //reads the toml file for the list of fanout urls and returns the struct
@@ -16,8 +17,10 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
   fmt.Println("REQUEST method: ", method)
   payload := r.Form.Encode()
   fmt.Println("REQUEST payload: ", payload)
-  fmt.Println("FAN OUT URLS: ", node.outUrls)
-
+  buffer.WriteString("{\"Responses\":[ ")
+  for _, url := range node.OutUrls {
+		fmt.Fprintf(os.Stdout, "Calling fanout with %s, %s, %s\n", url+r.URL.Path, method, payload)
+		go fanOutRequest(url+r.URL.Path, method, payload)
 }
 
 
