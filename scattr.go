@@ -11,10 +11,13 @@ import(
 func scattrHandler(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(os.Stdout, "REQUEST:[%s]\n", r)
   r.ParseForm()
-  //node := GetNodeData() //reads the toml file for the list of fanout urls
-  // method := r.Method
+  node := GetScattrData() //reads the toml file for the list of fanout urls and returns the struct
+  method := r.Method
+  fmt.Println("REQUEST method: ", method)
   payload := r.Form.Encode()
-  fmt.Println("PAYLOAD: ", payload)
+  fmt.Println("REQUEST payload: ", payload)
+  fmt.Println("FAN OUT URLS: ", node.outUrls)
+
 }
 
 

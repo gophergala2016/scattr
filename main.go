@@ -5,7 +5,7 @@ import (
 
 )
 
-type scattrStruct struct {
+type scattrData struct {
    outUrls []string //list of fanout Urls
 }
 
@@ -15,6 +15,7 @@ var (
 	adminPort  = flag.Int("q",9090,"use port for admin interface")
 	host       = flag.String("b", "0.0.0.0", "listen on Host")
 	port       = flag.Int("p", 8080, "use port")
+  ConfigFile = flag.String("c","urls.toml", "use Configfile")
 )
 
 func main() {
