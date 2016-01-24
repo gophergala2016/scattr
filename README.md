@@ -54,18 +54,7 @@ eval(function(data){
 
 ```
 
-## Installation
-  ```
-  $ go get https://github.com/gophergala2016/scattr
-  $ go build
-  ```
-- Start the scattr and admin servers(default set to port 8080 and 9090 respectively)
-
-  ```
-    $ scattr [-c] [-p] [-b]
-  ```
-
-### Terminal Switches
+### Command Line Flags
 
   ``` -c urls.toml ```
     use the fanout(scattr)page(default "urls.toml")
