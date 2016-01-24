@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/mreiferson/go-httpclient"
 	"net/http"
@@ -11,7 +10,7 @@ import (
 
 type JSONMsg struct {
 	URL      string
-	Response json.RawMessage
+	Response string
 }
 
 type ErrorMsg struct {

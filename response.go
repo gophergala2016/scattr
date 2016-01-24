@@ -62,10 +62,9 @@ func getResponseType(contentType string, url string, resp *http.Response) string
 
 func createJSONResponse(url string, resp *http.Response) string {
 	msg := readResponse(url, resp)
-	jsonMsg := &JSONMsg{url, json.RawMessage(msg)}
+	jsonMsg := JSONMsg{url, msg}
 	m, _ := json.Marshal(jsonMsg)
 	updatedMsg := string(m)
-	fmt.Println("updated..", updatedMsg)
 	return updatedMsg
 }
 

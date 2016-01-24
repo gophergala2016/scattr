@@ -14,6 +14,7 @@ func StartAdminInterface(host string, port int) {
   admin.HandleFunc("/assets/js/", JsAssetHandler)
   admin.HandleFunc("/assets/fonts/", FontsAssetHandler)
 	admin.HandleFunc("/add/", AddHandler)
+	admin.HandleFunc("/savescript/", SaveScriptHandler)
 	admin.HandleFunc("/delete/", DeleteHandler)
 	admin.HandleFunc("/", HomeHandler)
 	err := http.ListenAndServe(addr, admin)

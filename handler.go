@@ -33,6 +33,16 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
+func SaveScriptHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "ParseForm failed: %s\n", err.Error())
+	}
+	SavingScript(r.FormValue("script"))
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+
 func CssAssetHandler(w http.ResponseWriter, r *http.Request) {
 	asset := r.URL.Path[1:]
 	data, err := Asset(asset)
