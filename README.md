@@ -34,7 +34,7 @@ Usage of scattr:
   -b string
     	listen on Host (default "0.0.0.0")
   -c string
-    	use Configfile (default "urls.toml")
+    	use Configfile (default "config.toml")
   -p int
     	use port (default 8080)
   -q int
@@ -57,7 +57,7 @@ eval(function(data){
 ### Command Line Flags
 
   ``` -c urls.toml ```
-    use the fanout(scattr)page(default "urls.toml")
+    use the fanout(scattr)page(default "config.toml")
 
   ``` -p port ```
     scattr port to listen (default 8080)
