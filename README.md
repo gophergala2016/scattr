@@ -34,8 +34,6 @@ Usage of scattr:
     	listen on Host (default "0.0.0.0")
   -c string
     	use Configfile (default "urls.toml")
-  -l string
-    	specify script file. (default "script.txt")
   -p int
     	use port (default 8080)
   -q int
@@ -46,6 +44,14 @@ Usage of scattr:
 ```
 for example to run scattr
 
+Sample script to filter the response :
+
+```
+eval(function(data){
+  return data.Url
+});
+
+```
 
 ## Installation
   ```
@@ -55,16 +61,13 @@ for example to run scattr
 - Start the scattr and admin servers(default set to port 8080 and 9090 respectively)
 
   ```
-    $ skeddy [-c] [-l] [-p] [-b]
+    $ scattr [-c] [-p] [-b]
   ```
 
 ### Terminal Switches
 
   ``` -c urls.toml ```
     use the fanout(scattr)page(default "urls.toml")
-
-  ``` -l script.txt ```
-    get the script (default script.txt)
 
   ``` -p port ```
     scattr port to listen (default 8080)

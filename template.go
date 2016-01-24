@@ -36,7 +36,7 @@ const BaseTmpl = `
         <hr>
         <ul class="menu">
             <li>Contribute to Scattr</li>
-            <li><a href="http://github.com" id="ghlogo"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://github.com/gophergala2016/scattr" id="ghlogo"><i class="fa fa-github"></i></a></li>
         </ul>
     </div>
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
@@ -85,7 +85,7 @@ const ConfigTemp = `
     <h5>SCRIPT <small>Use this script to control scattering</small></h5>
     <div class="callout">
       <form method="post" action="/savescript/">
-      	<textarea  id="code" rows="20" cols="35" name="script"></textarea></br>
+      	<textarea  id="code" rows="20" cols="35" name="script">{{.Data}}</textarea></br>
         <input type="submit" value="Save" class="small primary button">
       </form>
     </div>

@@ -15,6 +15,8 @@ type FinalInput struct {
 	Response string
 }
 
+
+
 func GetBytes(key interface{}) ([]byte, error) {
 	var buf bytes.Buffer
 	enc := gob.NewEncoder(&buf)
@@ -87,7 +89,8 @@ func createFilteringInput(input string) []FinalInput {
 }
 
 func OutputWriter(FinalInputVar []FinalInput, w http.ResponseWriter) {
-	output, _ := evaluateScript(defaultScript, FinalInputVar)
+	nodes := GetScattrData()
+	output, _ := evaluateScript(nodes.Data, FinalInputVar)
 	fmt.Fprintf(w, output)
 }
 

@@ -7,7 +7,7 @@ import (
 func evaluateScript(src string, payload []FinalInput) (string, error) {
 	javaScript := otto.New()
 	var evalFunc otto.Value
-	javaScript.Set("rule", func(call otto.FunctionCall) otto.Value {
+	javaScript.Set("eval", func(call otto.FunctionCall) otto.Value {
 		evalFunc = call.Argument(0)
 		return otto.UndefinedValue()
 	})
