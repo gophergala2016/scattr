@@ -1,9 +1,7 @@
 package main
 
 import (
-	// "os"
 	"fmt"
-	// "bufio"
 	"github.com/BurntSushi/toml"
 )
 

@@ -14,7 +14,7 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
   var respString string
   fmt.Fprintf(os.Stdout, "REQUEST:[%s]\n", r)
   r.ParseForm()
-  node := GetScattrData() //reads the toml file for the list of fanout urls and returns the struct
+  node := GetScattrData()
   method := r.Method
   payload := r.Form.Encode()
   buffer.WriteString("\"Responses\":[ ")
@@ -30,6 +30,7 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
 	output, _ := evaluateScript(defaultScript, input)
 	fmt.Fprintf(os.Stdout, "Gathering response ....\n")
 	fmt.Fprintf(w, output)
+  log.Println("Final List of responses: \n", output)
 }
 
 

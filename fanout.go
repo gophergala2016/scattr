@@ -24,6 +24,7 @@ type JSONResponse struct {
 	Response string
 }
 
+
 func scattr(url string, method string, payload string, ch chan string) {
 	transport := &httpclient.Transport{
 		ResponseHeaderTimeout: 2 * time.Second,

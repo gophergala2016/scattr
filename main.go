@@ -5,7 +5,7 @@ import (
 )
 
 type scattrData struct {
-	OutUrls []string //list of fanout Urls
+	OutUrls []string 
 }
 
 const defaultScript = `
