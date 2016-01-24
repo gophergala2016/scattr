@@ -16,6 +16,7 @@ const strBanner = `
  \_____\/   \/____________/\_\___\     /____/_/\_\/       \_\/       \/_/    \_\/
 
 `
+
 func banner() {
-  log.Printf(strBanner)
+	log.Printf(strBanner)
 }

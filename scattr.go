@@ -22,16 +22,24 @@ func scattrHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(os.Stdout, "Calling fanout with %s, %s, %s\n", url+r.URL.Path, method, payload)
 		go scattr(url+r.URL.Path, method, payload, ch)
     respString = <- ch
-    log.Printf("Response: ", respString)
+    buffer.WriteString(respString)
+		buffer.WriteString(",")
+  }
+	input := buffer.String()
+	input = input[:len(input)-1] + " ]}"
+	output, _ := evaluateScript(defaultScript, input)
+	fmt.Fprintf(os.Stdout, "Gathering response ....\n")
+	fmt.Fprintf(w, output)
+}
 
-}
-}
 
 func StartScattrInterface(host string, port int) {
   addr := fmt.Sprintf("%s:%d", host, port)
   log.Printf("starting scattr interface at http://%s\n", addr)
-	http.HandleFunc("/", scattrHandler)
-  err := http.ListenAndServe(addr, nil)
+  scattr := http.NewServeMux()
+	scattr.HandleFunc("/", scattrHandler)
+  scattr.HandleFunc("/{path}", scattrHandler)
+  err := http.ListenAndServe(addr, scattr)
   if err != nil {
     log.Printf("Error: ", err)
   }

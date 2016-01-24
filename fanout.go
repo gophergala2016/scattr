@@ -1,10 +1,12 @@
 package main
 
 import (
-  "net/http"
-  "fmt"
-  "strings"
-  "encoding/json"
+	"encoding/json"
+	"fmt"
+	"github.com/mreiferson/go-httpclient"
+	"net/http"
+	"strings"
+	"time"
 )
 
 type JSONMsg struct {
@@ -23,10 +25,14 @@ type JSONResponse struct {
 }
 
 func scattr(url string, method string, payload string, ch chan string) {
-    req, _ := http.NewRequest(method, url, strings.NewReader(payload))
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    respStr := createResponse(url, resp, err)
-  	fmt.Printf("response from %s is %s \n", url, respStr)
-  	ch <- respStr
-  }
+	transport := &httpclient.Transport{
+		ResponseHeaderTimeout: 2 * time.Second,
+	}
+	defer transport.Close()
+	req, _ := http.NewRequest(method, url, strings.NewReader(payload))
+	client := &http.Client{Transport: transport}
+	resp, err := client.Do(req)
+	respStr := createResponse(url, resp, err)
+	fmt.Printf("response from %s is %s \n", url, respStr)
+	ch <- respStr
+}
