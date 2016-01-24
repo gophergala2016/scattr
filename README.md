@@ -5,7 +5,7 @@ Scattr has builtin admin interface to easily  add / remove endpoint and filter s
 
 The following schematic gives a very high-level overview of the workings of **Scattr**
 
-![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/Scattr.jpg "Scattr")
+![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/scattr.jpg "Scattr")
 ![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/screenshot.png "Scattr")
 
 ## Installation
