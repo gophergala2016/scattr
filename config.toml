@@ -1,2 +1,2 @@
-OutUrls = ["http://localhost:9090"]
+OutUrls = []
 Data = "eval(function(data){\r\n  return data[0].Url\r\n});"

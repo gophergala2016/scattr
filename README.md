@@ -1,11 +1,12 @@
 # scattr
 
-Scattr can be used to scatter a HTTP request to several endpoints and gather the responses and pass it back to the client.
-Scatter can be configured to add javascript filter which can further modify the gathered responses to make it useful to the clients. Scattr has builtin admin interface to easily  add / remove endpoint and filter scripts .
+This is a light weight server that users an incoming http request as a trigger to initiate http requests to one or more configured end points, waits until it receives responses for each such request and then combines the individual responses to prepare the final consolidated response for the original request. Custom logic can be scripted via JavaScript to control how the individual responses are processed.
+Scattr has builtin admin interface to easily  add / remove endpoint and filter scripts .
 
 The following schematic gives a very high-level overview of the workings of **Scattr**
 
 ![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/Scattr.jpg "Scattr")
+![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/screenshot.png "Scattr")
 
 ## Installation
 To install **Scattr** simply run
