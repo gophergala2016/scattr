@@ -1,24 +1,53 @@
 # scattr
 
-This application can be used to fan out a http request to several other endpoints. The other endpoints can be configured within this application.
-The http request comes to this server and will be fanned-out to the pre-defined endpoints. And finally the server collects the responses from those endpoints and returns a consolidated response.
+Scattr can be used to scatter a HTTP request to several endpoints and gather the responses and pass it back to the client.
+Scatter can be configured to add javascript filter which can further modify the gathered responses to make it useful to the clients. Scattr has builtin admin interface to easily  add / remove endpoint and filter scripts .
+
+The following schematic gives a very high-level overview of the workings of **Scattr**
+
+![Scattr-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/Scattr.jpg "Scattr")
+
+## Installation
+To install **Scattr** simply run
+
+```
+$ go get https://github.com/gophergala2016/scattr
+```
+
+This will download Scattr to `$GOPATH/src/github.com/gophergala2016/scattr`. Now cd to this directory and run
+`go build` to create `scattr` binary. Place this binary somewhere in PATH to install it.
+
 
 ## Usage
-This application can be used to fan out a http request to several other endpoints. The other endpoints can be configured within this application.
+To run scattr simply execute the binary in any folder using the following command-line
 
-![Tuning-image](https://github.com/gophergala2016/scattr/blob/master/screenshots/Scattr.jpg "Scattr")
+```
+$ scattr
+```
 
-## Guide
+Scattr can be run from command-line using the following syntax.
 
-- Install golang packages as follows :
+```
+$ scattr -h
+Usage of scattr:
+  -b string
+    	listen on Host (default "0.0.0.0")
+  -c string
+    	use Configfile (default "urls.toml")
+  -l string
+    	specify script file. (default "script.txt")
+  -p int
+    	use port (default 8080)
+  -q int
+    	use port for admin interface (default 9090)
+  -s string
+    	listen on Host for admin interface (default "0.0.0.0")
 
-    ```
-      $ go get github.com/BurntSushi/toml
-      $ go get github.com/robertkrimen/otto
-      $ go get github.com/mreiferson/go-httpclient
-    ```
-- Install the project and build it
+```
+for example to run scattr
 
+
+## Installation
   ```
   $ go get https://github.com/gophergala2016/scattr
   $ go build

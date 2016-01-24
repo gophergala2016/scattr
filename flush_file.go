@@ -19,5 +19,6 @@ func (node *scattrData) Flush() {
 	if err1 != nil {
 		log.Fatal(err)
 	}
+	log.Println("FILE: ", fileBuffer.String())
 	f.WriteString(fileBuffer.String())
 }

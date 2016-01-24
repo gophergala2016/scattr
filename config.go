@@ -20,5 +20,6 @@ func GetScattrData() *scattrData {
 		fmt.Println("ERROR:", err)
 		return nil
 	}
+	fmt.Println("CONF ", conf)
 	return conf
 }
